@@ -11,9 +11,6 @@ app_server <- function( input, output, session ) {
 
   output$mapCI <- renderPlot({
     ci_sp <-raster::getData("GADM", country = "CIV", level = 2)
-    p <- tmap::tm_shape(ci_sp) +
-      tmap::tm_polygons("NAME_2",
-                        n = 5, pal = "Greens")
-    p
+    mapview::mapview(ci_sp)
   })
 }
