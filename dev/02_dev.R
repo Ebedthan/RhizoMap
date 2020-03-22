@@ -21,7 +21,11 @@ usethis::use_package("echarts4r")
 
 ## Add modules ----
 ## Create a module infrastructure in R/
-golem::add_module(name = "loader") # Name of the module
+golem::add_module(name = "loader")
+golem::add_module(name = "selectInput")
+golem::add_module(name = "sliderInput")
+
+
 
 ## Add helper functions ----
 ## Creates ftc_* and utils_*

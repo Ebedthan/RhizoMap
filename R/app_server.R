@@ -1,18 +1,19 @@
 #' The application server-side
-#' 
-#' @param input,output,session Internal parameters for {shiny}. 
+#'
+#' @param input,output,session Internal parameters for {shiny}.
 #'     DO NOT REMOVE.
 #' @import shiny
-#' 
+#'
 #' @noRd
 app_server <- function( input, output, session ) {
   # List the first level callModules here
-  g <- Garcon$new("myImage", filter = "opacity")
-  
-  for(i in 1:10){
-    Sys.sleep(runif(1))
-    g$set(i * 10)
-  }
-  
-  waiter_hide()
+  callModule(mod_loader_server, "loader_ui_1")
+
+  output$mapCI <- renderPlot({
+    ci_sp <-raster::getData("GADM", country = "CIV", level = 2)
+    p <- tmap::tm_shape(ci_sp) +
+      tmap::tm_polygons("NAME_2",
+                        n = 5, pal = "Greens")
+    p
+  })
 }
