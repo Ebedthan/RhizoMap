@@ -23,3 +23,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://github.com/Ebedthan/RhizoMap
+BugReports: https://github.com/Ebedthan/RhizoMap/issues
