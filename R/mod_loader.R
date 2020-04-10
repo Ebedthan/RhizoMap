@@ -14,10 +14,11 @@ mod_loader_ui <- function(id){
     waiter::use_waiter(),
     waiter::waiter_show_on_load(
       tags$img(
-        src="https://waiter.john-coene.com/_assets/img/logo.png",
-        height=200,
+        src="www/rhizomap.png",
+        height=250,
         id = "myImage"
-      )
+      ),
+      h2("Gerez durablement la fertilité de vos sols...")
     )
   )
 }
@@ -27,7 +28,10 @@ mod_loader_ui <- function(id){
 #' @noRd
 mod_loader_server <- function(input, output, session){
   ns <- session$ns
-  g <- waiter::Garcon$new("myImage", filter = "opacity")
+  g <- waiter::Garcon$new(
+    id = "myImage",
+    filter = "opacity",
+    color = "#000000")
 
   for(i in 1:10){
     Sys.sleep(runif(1))

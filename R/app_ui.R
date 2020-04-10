@@ -29,7 +29,7 @@ app_ui <- function(request) {
         ),
 
         mainPanel(
-          plotOutput("mapCI")
+          echarts4r::echarts4rOutput("mapCI")
         )
       )
     )
