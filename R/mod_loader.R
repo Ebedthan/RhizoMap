@@ -17,8 +17,7 @@ mod_loader_ui <- function(id){
         src="www/rhizomap.png",
         height=250,
         id = "myImage"
-      ),
-      h2("Gerez durablement la fertilité de vos sols...")
+      )
     )
   )
 }
@@ -29,9 +28,9 @@ mod_loader_ui <- function(id){
 mod_loader_server <- function(input, output, session){
   ns <- session$ns
   g <- waiter::Garcon$new(
-    id = "myImage",
-    filter = "opacity",
-    color = "#000000")
+    "myImage",
+    bg_color = "#000000",
+    filter = "opacity")
 
   for(i in 1:10){
     Sys.sleep(runif(1))

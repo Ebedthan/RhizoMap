@@ -24,7 +24,7 @@ usethis::use_package("echarts4r")
 golem::add_module(name = "loader")
 golem::add_module(name = "selectInput")
 golem::add_module(name = "sliderInput")
-
+golem::add_module(name = "plotLoader")
 
 
 ## Add helper functions ----
