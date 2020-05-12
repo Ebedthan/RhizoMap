@@ -24,12 +24,12 @@ usethis::use_package("echarts4r")
 golem::add_module(name = "loader")
 golem::add_module(name = "selectInput")
 golem::add_module(name = "sliderInput")
-golem::add_module(name = "plotLoader")
+golem::add_module(name = "alert")
 
 
 ## Add helper functions ----
 ## Creates ftc_* and utils_*
-#golem::add_fct("helpers")
+golem::add_fct("helpers")
 #golem::add_utils("helpers")
 
 ## External resources

@@ -3,6 +3,7 @@
 #' @param request Internal parameter for `{shiny}`.
 #'     DO NOT REMOVE.
 #' @import shiny
+#' @import bs4Dash
 #'
 #' @noRd
 app_ui <- function(request) {
@@ -11,27 +12,57 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # List the first level UI elements here
     mod_loader_ui("loader_ui_1"),
-    fluidPage(
-      titlePanel("RhizoMap"),
-
-      sidebarLayout(
-        sidebarPanel(
-          helpText("Create abundance maps with
-                   ecological genomics on symbiotic bacteria
-                   in CI soils."),
-          mod_selectInput_ui("selectInput_ui_1",
-                             label = "Choose a variable to display",
-                             choices = c(1,2,3,4,5),
-                             selected = 1),
-          mod_sliderInput_ui("sliderInput_ui_1",
-                             label = "Range of interest",
-                             min = 0, max = 100, value = c(0, 100))
+    bs4DashPage(
+      sidebar_collapsed = TRUE,
+      controlbar_collapsed = TRUE,
+      bs4DashNavbar(),
+      sidebar = bs4DashSidebar(
+        title = "RhizoMap",
+        skin = "light",
+        status = "primary",
+        brandColor = "primary",
+        url = "#",
+        src = "www/rhizomap.png",
+        elevation = 3,
+        opacity = 0.8,
+        bs4SidebarMenu(
+          id = "side-1",
+          bs4SidebarMenuItem(
+            tabName = "selectZone",
+            text = "Selection de la Zone",
+            icon = "home"
+          )
         ),
-
-        mainPanel(
-          echarts4r::echarts4rOutput("mapCI")
+        bs4SidebarMenu(
+          id = "side-2",
+          bs4SidebarMenuItem(
+            tabName = "results",
+            text = "Resultats",
+            icon = "gears"
+          )
         )
-      )
+      ),
+      bs4DashBody(
+        h2("Selectionnez votre zone de culture"),
+        tmap::tmapOutput("mapCI"),
+        fluidRow(
+          bs4Box(
+            width = 6,
+            height = "300px",
+            mod_selectInput_ui("selectInput_ui_1",
+                              label = "Choisisez dans la liste",
+                              choices = c("a","b","c"),
+                              selected = "a")
+          ),
+          bs4Box(
+            width = 6,
+            height = "300px",
+            title = "La zone selectionnee",
+            verbatimTextOutput("zonesel")
+          )
+        )
+      ),
+      footer = bs4DashFooter()
     )
   )
 }
@@ -55,8 +86,7 @@ golem_add_external_resources <- function(){
     bundle_resources(
       path = app_sys('app/www'),
       app_title = 'RhizoMap'
-    )
-    # Add here other external resources
-    # for example, you can add shinyalert::useShinyalert()
+    ),
+    shinyalert::useShinyalert()
   )
 }
